@@ -365,7 +365,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 ```{python}
 review['clean_text'] = review['clean_text'].astype('str')
-
 review_5 = review[review['group'] == '5-star'].copy()
 review_low = review[review['group'] == '1-4-star'].copy()
 ```
