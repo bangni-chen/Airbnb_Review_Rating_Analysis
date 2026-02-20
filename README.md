@@ -5,19 +5,19 @@
 
 This project investigates what separates 5-star Airbnb reviews from
 lower-rated reviews. The data were scraped from Airbnb listings in
-Manhattan, New York City. The dataset includes reviews from over 80
+Manhattan, New York. The dataset includes reviews from over 80
 listings and contains over 3000 review texts with corresponding star
 ratings.
 
 The analysis combines text processing, sentiment analysis, topic
 modeling, and text classification to examine linguistic and thematic
-differences between 5-star and 1–4-star reviews. Instead of focusing on
+differences between 5-star and non-5-star reviews. Instead of focusing on
 ratings alone, the project analyzes review language to understand how
 emotional tone, recurring themes, and specific operational issues relate
 to rating outcomes.
 
 By integrating these methods, the results provide structured insights
-into what characterizes a “perfect” stay versus a “nearly perfect” one.
+into what characterizes a perfect stay versus a nearly perfect one.
 For hosts, the findings highlight recurring service gaps that may
 prevent a listing from consistently receiving 5-star ratings. For
 guests, the analysis suggests how review content can reveal meaningful
@@ -267,7 +267,7 @@ import re
 review = pd.read_csv('~/Desktop/Unstructured Data Analytics/final_project/airbnb_reviews_clean.csv')
 ```
 
-### Writing Style Differences Between 5-Star and Lower-Rated Reviews
+### Writing style differences between 5-star and non-5-star reviews
 
 ``` python
 # Create group variable
@@ -310,7 +310,7 @@ style_summary
 
 
 
-Lower-rated reviews are longer on average (more words and more
+Non-5-star reviews are longer on average (more words and more
 sentences). 5-star reviews are shorter but more expressive, using more
 exclamation marks. This suggests that high ratings often come with
 enthusiastic, emotional language, while lower ratings contain more
@@ -401,16 +401,16 @@ negative_rate
     Name: is_negative, dtype: float64
 
 Sentiment analysis reveals a clear emotional difference between 5-star
-and lower-rated reviews.
+and non-5-star reviews.
 
 On average, 5-star reviews have a much higher polarity score (0.41
-vs. 0.22), indicating substantially more positive emotional language.
+vs. 0.22), indicating more positive emotional language.
 They are also slightly more subjective, suggesting that guests express
 stronger personal feelings in perfect ratings.
 
-In contrast, lower-rated reviews are far more likely to contain negative
+In contrast, non-5-star reviews are more likely to contain negative
 sentiment. While almost none of the 5-star reviews are negative (0.5%),
-nearly 10% of lower-rated reviews fall below zero polarity. However,
+nearly 10% of non-5-star reviews fall below zero polarity. However,
 this difference is not absolute, some 4-star reviews still contain
 highly positive language, suggesting that ratings are influenced by more
 than just emotional tone.
@@ -478,7 +478,7 @@ This topic includes words such as “host”, “home”, “comfortable”,
 personal hospitality. This theme reflects guests who describe their stay
 as welcoming and home-like.
 
-### Top words for lower-rated topics
+### Top words for non-5-star topics
 
 ``` python
 vectorizer_low = CountVectorizer()
@@ -525,10 +525,10 @@ This topic includes words such as “shower”, “water”, “bathroom”,
 operational problems. This theme reflects concrete complaints about
 physical conditions of the accommodation.
 
-### Thematic Comparison Between 5-Star and Lower-Rated Reviews
+### Thematic comparison between 5-star and non-5-star reviews
 
 Topic modeling reveals a clear thematic contrast between 5-star and
-lower-rated reviews.
+non-5-star reviews.
 
 The 5-star topics consistently emphasize overall satisfaction,
 hospitality, comfort, and convenience. Words such as “great,”
@@ -536,7 +536,7 @@ hospitality, comfort, and convenience. Words such as “great,”
 positive experiences. Even when discussing operational aspects like
 rooms or check-in, the tone remains affirming.
 
-In contrast, lower-rated reviews shift toward specific functional
+In contrast, non-5-star reviews shift toward specific functional
 details. Words such as “shower,” “water,” “bathroom,” “issue,” and
 “small” indicate concrete operational problems. Rather than describing
 the overall experience, these reviews focus on breakdowns in service or
@@ -544,7 +544,7 @@ physical conditions.
 
 While both groups mention common features like “room” and “location,”
 the difference lies in emphasis. 5-star reviews frame these elements
-positively as part of a satisfying stay, whereas lower-rated reviews
+positively as part of a satisfying stay, whereas non-5-star reviews
 highlight them in the context of limitations or issues.
 
 ## Text Classification
@@ -689,14 +689,14 @@ top_neg
 
 
 
-### Model Interpretation
+### Model interpretation
 
 This model was not built simply to predict ratings, since guests already
 provide star scores. Instead, it helps quantify which specific words and
 issues are most strongly associated with a drop from 5 stars to lower
 ratings.
 
-The model achieved a test accuracy of 0.869, showing that review text
+The model achieved a test accuracy of 0.8695, showing that review text
 alone can strongly distinguish between 5-star and non-5-star reviews. It
 performs especially well in identifying 5-star reviews, with a recall of
 0.990, suggesting that enthusiastic reviews share consistent linguistic
@@ -712,7 +712,7 @@ expensive, floor, and reservation, focus on concrete operational issues.
 Many lower-rated reviews do not sound extremely negative, but instead
 point to specific friction points or unmet expectations.
 
-### Implications for Hosts and Guests
+### Implications for hosts and guests
 
 For hosts, the results suggest that ratings are not reduced because of
 location or general experience, since those themes appear across both
